@@ -1,0 +1,43 @@
+module tb_alu;
+  reg[3:0]a,b;
+  reg m,s2,s1,s0;
+  wire[7:0]res;
+  alu uut(
+    .a(a),.b(b),
+    .m(m),
+    .s2(s2),
+    .s1(s1),
+    .s0(s0),
+    .res(res)
+  );
+  initial begin
+    $dumpfile("alu_tb.vcd");
+    $dumpvars(0,tb_alu);
+              end
+              
+  initial begin
+    $display("Time\t m s2 s1 s0 |a  b|res");
+    $monitor("%0t\t %b %b %b %b |%d  %d|%d",$time,m,s2,s1,s0,a,b,res);
+    a=4'd6;b=4'd2;m=0;
+    s2=0; s1=0; s0=0; #10;
+     s2=0; s1=0; s0=1; #10;
+   s2=0; s1=1; s0=0; #10;
+   s2=0; s1=1; s0=1; #10; 
+    s2=1; s1=0; s0=0; #10;
+     s2=1; s1=0; s0=1; #10;
+   s2=1; s1=1; s0=0; #10;
+   s2=1; s1=1; s0=1; #10;
+    m=1;
+     s2=0; s1=0; s0=0; #10;
+     s2=0; s1=0; s0=1; #10;
+   s2=0; s1=1; s0=0; #10;
+   s2=0; s1=1; s0=1; #10; 
+    s2=1; s1=0; s0=0; #10;
+     s2=1; s1=0; s0=1; #10;
+   s2=1; s1=1; s0=0; #10;
+   s2=1; s1=1; s0=1; #10;
+    $finish;
+  end
+endmodule
+  
+  
